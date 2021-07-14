@@ -1,12 +1,13 @@
 import "./ExpenceItem.scss";
 
-function ExpenceItem() {
+function ExpenceItem(props) {
+
     return (
         <div className="expense-item">
-            <div>March</div>
+            <div>{props.date.toString()}</div>
             <div className="expense-item__description">
-                <h2>Car</h2>
-                <div className="expense-item__price">$200</div>
+                <h2>{props.title}</h2>
+                <div className="expense-item__price">${props.amount}</div>
             </div>
         </div>
     );
