@@ -49,16 +49,20 @@ const ExpenseForm = (props) => {
     };
 
     const submitHandler = (event) => {
+        // prevend default form overloading
         event.preventDefault();
 
+        // get all the data from current state
         const expenseData = {
             title: inputTitle,
             amount: inputAmount,
             date: new Date(inputDate),
         };
 
+        // call parent component function for transmit data
         props.onExpenseFormSave(expenseData)
 
+        // clear all input fields
         setInputTitle('')
         setInputAmount('')
         setInputDate('')
