@@ -3,56 +3,77 @@ import "./ExpenseForm.scss";
 
 const ExpenseForm = () => {
     // separate states
-    // const [inputTitle, setInputTitle] = useState('');
-    // const [inputAmount, setInputAmount] = useState('');
-    // const [inputDate, setInputDate] = useState('');
+    const [inputTitle, setInputTitle] = useState("");
+    const [inputAmount, setInputAmount] = useState("");
+    const [inputDate, setInputDate] = useState("");
 
     // one state with object
-    const [userInput, setUserInput] = useState({
-        inputTitle: "",
-        inputAmount: "",
-        inputDate: "",
-    });
+    // const [userInput, setUserInput] = useState({
+    //     inputTitle: "",
+    //     inputAmount: "",
+    //     inputDate: "",
+    // });
 
     const titleChangeHandler = (event) => {
-        // setInputTitle(event.target.value);
-        // change state based on previous - not good approach
+        setInputTitle(event.target.value);
+
+        // change state with object based on previous - not good approach
         // setUserInput({
         //     ...userInput,
         //     inputTitle: event.target.value,
         // });
-        // change state based on previous - good approach
 
-        setUserInput((prevState) => {
-            return {
-                ...prevState,
-                inputTitle: event.target.value
-            };
-        })
+        // change state with object based on previous - good approach
+        // setUserInput((prevState) => {
+        //     return {
+        //         ...prevState,
+        //         inputTitle: event.target.value
+        //     };
+        // })
     };
 
     const amountChangeHandler = (event) => {
-        // setInputAmount(event.target.value);
-        setUserInput({
-            ...userInput,
-            inputAmount: event.target.value,
-        });
+        setInputAmount(event.target.value);
+        // setUserInput({
+        //     ...userInput,
+        //     inputAmount: event.target.value,
+        // });
     };
 
     const dateChangeHandler = (event) => {
-        // setInputDate(event.target.value);
-        setUserInput({
-            ...userInput,
-            inputData: event.target.value,
-        })
+        setInputDate(event.target.value);
+        // setUserInput({
+        //     ...userInput,
+        //     inputData: event.target.value,
+        // })
+    };
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const expenseDate = {
+            title: inputTitle,
+            amount: inputAmount,
+            date: new Date(inputDate),
+        };
+
+        console.log(expenseDate);
+
+        setInputTitle('')
+        setInputAmount('')
+        setInputDate('')
     };
 
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label>Title</label>
-                    <input type="text" onChange={titleChangeHandler} />
+                    <input
+                        type="text"
+                        value={inputTitle}
+                        onChange={titleChangeHandler}
+                    />
                 </div>
                 <div className="new-expense__control">
                     <label>Amount</label>
@@ -60,6 +81,7 @@ const ExpenseForm = () => {
                         type="number"
                         min="0.01"
                         step="0.01"
+                        value={inputAmount}
                         onChange={amountChangeHandler}
                     />
                 </div>
@@ -69,6 +91,7 @@ const ExpenseForm = () => {
                         type="date"
                         min="2019-01-01"
                         max="2022-12-31"
+                        value={inputDate}
                         onChange={dateChangeHandler}
                     />
                 </div>
