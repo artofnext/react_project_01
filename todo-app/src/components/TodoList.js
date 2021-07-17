@@ -1,13 +1,16 @@
 import TodoItem from "./TodoItem";
-import ListGroup from "react-bootstrap/ListGroup";
+// import ListGroup from "react-bootstrap/ListGroup";
 
 const TodoList = (props) => {
+    const setDoneItem = (doneItemId) => {
+        props.onDoneChange(doneItemId)
+    }
     return (
-        <ListGroup>
+        <div>
             {props.todos.map((todo) => {
-                return <TodoItem item={todo.todo} />;
+                return <TodoItem onDoneChange={setDoneItem} key={todo.id} item={todo} />;
             })}
-        </ListGroup>
+        </div>
     );
 };
 
